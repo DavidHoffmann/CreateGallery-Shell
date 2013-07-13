@@ -29,6 +29,8 @@ cat <<EOF > ${DSTDIR}/index.html
 <html>
 <head>
 <title>${2}</title>
+<meta name="generator" content="https://github.com/00091701/CreateGallery-Shell" />
+<meta name="robots" content="noindex,nofollow" />
 <link href="lightbox2/css/lightbox.css" rel="stylesheet" />
 <script src="lightbox2/js/jquery-1.10.2.min.js"></script>
 <script src="lightbox2/js/lightbox-2.6.min.js"></script>
