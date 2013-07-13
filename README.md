@@ -8,6 +8,7 @@ jhead
 Example
 -------
 ./CeateGallery.sh FILES TITLE
+
 ./CeateGallery.sh "/tmp/for_gallery*.jpg" "My gallery"
 
 Optional
