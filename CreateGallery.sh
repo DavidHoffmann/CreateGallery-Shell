@@ -23,7 +23,7 @@
 DSTDIR=`mktemp -d`
 
 # copy lightbox2 files to gallery
-cp -Rf ${PWD}/lightbox2 ${DSTDIR}/lightbox2
+cp -Rf `dirname ${0}`/lightbox2 ${DSTDIR}/lightbox2
 
 cat <<EOF > ${DSTDIR}/index.html
 <html>
@@ -71,9 +71,9 @@ else
 fi
 
 # add watermark
-if [ -e "${PWD}/photograph.png" ]
+if [ -e "`dirname ${0}`/photograph.png" ]
 then
-    composite -gravity SouthWest "${PWD}/photograph.png" ${DSTIMAGEFILE} ${DSTIMAGEFILE} 
+    composite -gravity SouthWest "`dirname ${0}`/photograph.png" ${DSTIMAGEFILE} ${DSTIMAGEFILE} 
 fi
 
 # add image to html file
@@ -88,6 +88,7 @@ EOF
 
 # delete temp files
 rm -Rf ${DSTDIR}/tmp
+rm -Rf ${DSTDIR}/lightbox2/releases
 
 echo ${DSTDIR}
 
