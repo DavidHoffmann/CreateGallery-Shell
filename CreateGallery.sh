@@ -31,17 +31,18 @@ cat <<EOF > ${DSTDIR}/index.html
 <title>${2}</title>
 <meta name="generator" content="https://github.com/DavidHoffmann/CreateGallery-Shell" />
 <meta name="robots" content="noindex,nofollow" />
-<link href="lightbox2/css/lightbox.css" rel="stylesheet" />
-<script src="lightbox2/js/jquery-1.10.2.min.js"></script>
-<script src="lightbox2/js/lightbox-2.6.min.js"></script>
+<meta name=viewport content="width=device-width, initial-scale=1" />
 </head>
 <body>
 <h1>${2}</h1>
+<p><a href="download.zip">Download</a></p>
 EOF
 
 echo "copy images to tmp"
 mkdir -p ${DSTDIR}/tmp
 cp ${1} ${DSTDIR}/tmp
+
+find ${DSTDIR}/tmp -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
 
 mkdir -p ${DSTDIR}/thumbs
 mkdir -p ${DSTDIR}/images
@@ -82,13 +83,20 @@ echo "<a href=\"images/${BF}\" rel=\"lightbox\" data-lightbox=\"gal\"><img class
 done
 
 cat <<EOF >> ${DSTDIR}/index.html
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script src="lightbox2/js/lightbox-2.6.min.js"></script>
 </body>
 </html>
+<link href="lightbox2/css/lightbox.css" rel="stylesheet" />
 EOF
 
 # delete temp files
 rm -Rf ${DSTDIR}/tmp
 rm -Rf ${DSTDIR}/lightbox2/releases
+
+
+cd ${DSTDIR}/images
+zip ../download.zip -r *
 
 echo ${DSTDIR}
 
